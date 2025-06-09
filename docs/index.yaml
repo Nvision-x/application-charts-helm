@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   nvisnx-deployment:
   - apiVersion: v2
-    created: "2025-06-09T16:48:58.2178584+08:00"
+    created: "2025-06-09T18:09:14.6548353+08:00"
     dependencies:
     - condition: minio.enabled
       name: minio
@@ -35,11 +35,11 @@ entries:
     digest: 29318828c27cec459d657ab2cb72e77996cae327851fa65625e7f92b6cfbd688
     name: nvisnx-deployment
     urls:
-    - https://nvision-x.github.io/nvisnx-helm-charts-latest/nvisnx-deployment-0.1.0.tgz
+    - https://charts.kermon.today/nvisnx-deployment-0.1.0.tgz
     version: 0.1.0
   nvisnx-prerequists:
   - apiVersion: v2
-    created: "2025-06-09T16:48:58.2229972+08:00"
+    created: "2025-06-09T18:09:14.6663597+08:00"
     dependencies:
     - condition: certmanager.enabled
       name: cert-manager
@@ -56,6 +56,6 @@ entries:
     digest: a3db76324e71e34048a913d51b70cbaa5587f3b8dd4bdbe22939a20d3a71c602
     name: nvisnx-prerequists
     urls:
-    - https://nvision-x.github.io/nvisnx-helm-charts-latest/nvisnx-prerequists-0.1.0.tgz
+    - https://charts.kermon.today/nvisnx-prerequists-0.1.0.tgz
     version: 0.1.0
-generated: "2025-06-09T16:48:58.1347203+08:00"
+generated: "2025-06-09T18:09:14.5823456+08:00"
