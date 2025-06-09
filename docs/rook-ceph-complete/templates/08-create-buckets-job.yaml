@@ -1,0 +1,72 @@
+{{- if and .Values.objectStorage.enabled .Values.objectStorage.bucketCreation.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ .Values.objectStorage.bucketCreation.name }}
+  namespace: {{ .Values.objectStorage.bucketCreation.namespace }}
+  labels:
+    {{- include "rook-ceph-complete.labels" . | nindent 4 }}
+spec:
+  template:
+    spec:
+      containers:
+      - name: bucket-creator
+        image: {{ .Values.objectStorage.bucketCreation.image }}
+        env:
+        - name: S3_ENDPOINT
+          value: "http://rook-ceph-rgw-{{ .Values.objectStorage.objectStore.name }}.{{ .Values.objectStorage.objectStore.namespace }}.svc.cluster.local"
+        - name: S3_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rook-ceph-object-user-{{ .Values.objectStorage.objectStore.name }}-{{ .Values.objectStorage.objectStoreUser.name }}
+              key: AccessKey
+        - name: S3_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: rook-ceph-object-user-{{ .Values.objectStorage.objectStore.name }}-{{ .Values.objectStorage.objectStoreUser.name }}
+              key: SecretKey
+        command:
+        - /bin/sh
+        - -c
+        - |
+          echo "Configuring MinIO client for {{ .Values.objectStorage.objectStore.name }}..."
+          mc alias set {{ .Values.objectStorage.objectStore.name }} $S3_ENDPOINT $S3_ACCESS_KEY $S3_SECRET_KEY
+          
+          # Wait for service to be ready
+          echo "Waiting for {{ .Values.objectStorage.objectStore.name }} object storage to be ready..."
+          until mc admin info {{ .Values.objectStorage.objectStore.name }} > /dev/null 2>&1; do
+            echo "Waiting for {{ .Values.objectStorage.objectStore.name }} service..."
+            sleep 5
+          done
+          
+          echo "Creating {{ .Values.objectStorage.objectStore.name }} buckets..."
+          
+          {{- range .Values.objectStorage.bucketCreation.buckets }}
+          # Create bucket: {{ .name }}
+          echo "Creating bucket: {{ .name }} - {{ .description }}"
+          mc mb {{ $.Values.objectStorage.objectStore.name }}/{{ .name }} || echo "Bucket {{ .name }} already exists"
+          {{- end }}
+          
+          echo "Listing all buckets:"
+          mc ls {{ .Values.objectStorage.objectStore.name }}/
+          
+          echo "Setting bucket policies..."
+          
+          {{- range .Values.objectStorage.bucketCreation.buckets }}
+          {{- if eq .policy "public-read" }}
+          # Set public read policy for {{ .name }}
+          mc anonymous set download {{ $.Values.objectStorage.objectStore.name }}/{{ .name }}
+          {{- else }}
+          # {{ .name }} remains private (default)
+          echo "{{ .name }} bucket remains private"
+          {{- end }}
+          {{- end }}
+          
+          echo "Bucket creation completed successfully!"
+          
+          # Show final bucket list
+          echo "Final bucket list:"
+          mc ls {{ .Values.objectStorage.objectStore.name }}/
+      restartPolicy: {{ .Values.objectStorage.bucketCreation.job.restartPolicy }}
+  backoffLimit: {{ .Values.objectStorage.bucketCreation.job.backoffLimit }}
+{{- end }}

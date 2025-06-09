@@ -1,0 +1,43 @@
+{{- if .Values.objectStorage.enabled }}
+apiVersion: ceph.rook.io/v1
+kind: CephObjectStore
+metadata:
+  name: {{ .Values.objectStorage.objectStore.name }}
+  namespace: {{ .Values.objectStorage.objectStore.namespace }}
+  labels:
+    {{- include "rook-ceph-complete.labels" . | nindent 4 }}
+spec:
+  metadataPool:
+    failureDomain: {{ .Values.objectStorage.objectStore.metadataPool.failureDomain }}
+    replicated:
+      size: {{ .Values.objectStorage.objectStore.metadataPool.replicated.size }}
+  dataPool:
+    failureDomain: {{ .Values.objectStorage.objectStore.dataPool.failureDomain }}
+    replicated:
+      size: {{ .Values.objectStorage.objectStore.dataPool.replicated.size }}
+  preservePoolsOnDelete: {{ .Values.objectStorage.objectStore.preservePoolsOnDelete }}
+  gateway:
+    port: {{ .Values.objectStorage.objectStore.gateway.port }}
+    instances: {{ .Values.objectStorage.objectStore.gateway.instances }}
+    placement:
+      nodeAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: kubernetes.io/arch
+              operator: In
+              values:
+              - amd64
+    resources:
+      limits:
+        cpu: {{ .Values.objectStorage.objectStore.gateway.resources.limits.cpu | quote }}
+        memory: {{ .Values.objectStorage.objectStore.gateway.resources.limits.memory | quote }}
+      requests:
+        cpu: {{ .Values.objectStorage.objectStore.gateway.resources.requests.cpu | quote }}
+        memory: {{ .Values.objectStorage.objectStore.gateway.resources.requests.memory | quote }}
+    priorityClassName: {{ .Values.objectStorage.objectStore.gateway.priorityClassName }}
+  healthCheck:
+    bucket:
+      disabled: {{ .Values.objectStorage.objectStore.healthCheck.bucket.disabled }}
+      interval: {{ .Values.objectStorage.objectStore.healthCheck.bucket.interval }}
+{{- end }}

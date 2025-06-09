@@ -1,0 +1,23 @@
+{{- if .Values.blockStorage.enabled }}
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: {{ .Values.blockStorage.storageClass.name }}
+  labels:
+    {{- include "rook-ceph-complete.labels" . | nindent 4 }}
+provisioner: rook-ceph.rbd.csi.ceph.com
+parameters:
+  clusterID: {{ .Values.cephCluster.name }}
+  pool: {{ .Values.blockStorage.storageClass.pool }}
+  imageFormat: {{ .Values.blockStorage.storageClass.imageFormat | quote }}
+  imageFeatures: {{ .Values.blockStorage.storageClass.imageFeatures }}
+  csi.storage.k8s.io/provisioner-secret-name: rook-csi-rbd-provisioner
+  csi.storage.k8s.io/provisioner-secret-namespace: {{ .Values.cephCluster.namespace }}
+  csi.storage.k8s.io/controller-expand-secret-name: rook-csi-rbd-provisioner
+  csi.storage.k8s.io/controller-expand-secret-namespace: {{ .Values.cephCluster.namespace }}
+  csi.storage.k8s.io/node-stage-secret-name: rook-csi-rbd-node
+  csi.storage.k8s.io/node-stage-secret-namespace: {{ .Values.cephCluster.namespace }}
+  csi.storage.k8s.io/fstype: {{ .Values.blockStorage.storageClass.fstype }}
+allowVolumeExpansion: {{ .Values.blockStorage.storageClass.allowVolumeExpansion }}
+reclaimPolicy: {{ .Values.blockStorage.storageClass.reclaimPolicy }}
+{{- end }}

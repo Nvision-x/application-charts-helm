@@ -1,0 +1,20 @@
+{{- if .Values.filesystem.enabled }}
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: {{ .Values.filesystem.storageClass.name }}
+  labels:
+    {{- include "rook-ceph-complete.labels" . | nindent 4 }}
+provisioner: rook-ceph.cephfs.csi.ceph.com
+parameters:
+  clusterID: {{ .Values.cephCluster.name }}
+  fsName: {{ .Values.filesystem.name }}
+  csi.storage.k8s.io/provisioner-secret-name: rook-csi-cephfs-provisioner
+  csi.storage.k8s.io/provisioner-secret-namespace: {{ .Values.cephCluster.namespace }}
+  csi.storage.k8s.io/controller-expand-secret-name: rook-csi-cephfs-provisioner
+  csi.storage.k8s.io/controller-expand-secret-namespace: {{ .Values.cephCluster.namespace }}
+  csi.storage.k8s.io/node-stage-secret-name: rook-csi-cephfs-node
+  csi.storage.k8s.io/node-stage-secret-namespace: {{ .Values.cephCluster.namespace }}
+allowVolumeExpansion: {{ .Values.filesystem.storageClass.allowVolumeExpansion }}
+reclaimPolicy: {{ .Values.filesystem.storageClass.reclaimPolicy }}
+{{- end }}
