@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   nvisnx-deployment:
   - apiVersion: v2
-    created: "2025-06-09T20:46:40.954188+08:00"
+    created: "2025-06-09T22:03:50.658692+08:00"
     dependencies:
     - condition: minio.enabled
       name: minio
@@ -41,34 +41,34 @@ entries:
     version: 0.1.0
   nvisnx-prerequists:
   - apiVersion: v2
-    created: "2025-06-09T20:46:40.9597267+08:00"
+    created: "2025-06-09T22:03:50.6672924+08:00"
     dependencies:
     - condition: certmanager.enabled
       name: cert-manager
       repository: ""
       version: 1.17.2
+    - condition: rook.enabled
+      name: rook-ceph
+      repository: https://charts.rook.io/release
+      version: 1.14.6
     description: Prerequisite services and configurations for Nvisnx deployment :storage.
-    digest: c3e64c6db3b72241105d421fd524330c13f0db48a4e16c59b8d6373c9bf305b1
+    digest: 6f7deb6475401b5643f8edf42b7965ae7559b47257024c1167e4153a35c0dad7
     name: nvisnx-prerequists
     urls:
     - https://charts.kermon.today/nvisnx-prerequists-0.1.0.tgz
     version: 0.1.0
   nvisnx-storageclass:
   - apiVersion: v2
-    created: "2025-06-09T20:46:40.9632498+08:00"
+    created: "2025-06-09T22:03:50.6688301+08:00"
     dependencies:
-    - condition: rook.enabled
-      name: rook-ceph
-      repository: https://charts.rook.io/release
-      version: 1.14.6
     - condition: nfs.enabled
       name: nfs-subdir-external-provisioner
       repository: ""
       version: 4.0.14
     description: Prerequisite services for nVisionX
-    digest: 8076b3ad1b5f908c0ce85163f5996107d74d7d674a8a0505d89c6e2b3f452c01
+    digest: 4b6ab14aa6b81e394d641065a67b058fd0fe8dac386c752ec98f06f8ea16ac87
     name: nvisnx-storageclass
     urls:
     - https://charts.kermon.today/nvisnx-storageclass-0.1.0.tgz
     version: 0.1.0
-generated: "2025-06-09T20:46:40.8817893+08:00"
+generated: "2025-06-09T22:03:50.5830388+08:00"
