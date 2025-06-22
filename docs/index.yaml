@@ -1,8 +1,29 @@
 apiVersion: v1
 entries:
+  logging-stack:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2025-06-23T04:20:08.4075889+08:00"
+    dependencies:
+    - name: fluentd
+      repository: https://fluent.github.io/helm-charts
+      version: 0.3.0
+    - name: loki
+      repository: https://grafana.github.io/helm-charts
+      version: 5.47.2
+    - name: kube-prometheus-stack
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 72.5.2
+    description: A Helm umbrella chart for Fluentd, Loki, and kube-prometheus-stack
+    digest: 4005acc998913db7d92f897dbe4d437a9d961500e91df135796c8f26e46d9bd9
+    name: logging-stack
+    type: application
+    urls:
+    - https://charts.kermon.today/logging-stack-0.1.0.tgz
+    version: 0.1.0
   nvisnx-deployment:
   - apiVersion: v2
-    created: "2025-06-23T03:34:02.5493974+08:00"
+    created: "2025-06-23T04:20:08.4706068+08:00"
     dependencies:
     - condition: minio.enabled
       name: minio
@@ -41,7 +62,7 @@ entries:
     version: 0.1.0
   nvisnx-prerequists:
   - apiVersion: v2
-    created: "2025-06-23T03:34:02.5596718+08:00"
+    created: "2025-06-23T04:20:08.4742056+08:00"
     dependencies:
     - condition: certmanager.enabled
       name: cert-manager
@@ -57,38 +78,10 @@ entries:
     urls:
     - https://charts.kermon.today/nvisnx-prerequists-0.1.0.tgz
     version: 0.1.0
-  observability-stack:
-  - apiVersion: v2
-    appVersion: "1.0"
-    created: "2025-06-23T03:34:02.6012687+08:00"
-    dependencies:
-    - name: prometheus
-      repository: https://prometheus-community.github.io/helm-charts
-      version: 25.7.0
-    - name: kube-prometheus-stack
-      repository: https://prometheus-community.github.io/helm-charts
-      version: 58.5.0
-    - name: loki
-      repository: https://grafana.github.io/helm-charts
-      version: 6.30.1
-    - name: grafana
-      repository: https://grafana.github.io/helm-charts
-      version: 7.3.9
-    - name: fluentd
-      repository: https://fluent.github.io/helm-charts
-      version: 0.3.0
-    description: A Helm chart for Fluentd, Loki, Grafana, Prometheus, Exporters, and
-      Alertmanager
-    digest: ef9171955957ff930f320297327e9031da2d77648aba31f2b9383e63a9cbf70a
-    name: observability-stack
-    type: application
-    urls:
-    - https://charts.kermon.today/observability-stack-0.1.0.tgz
-    version: 0.1.0
   rook-ceph-complete:
   - apiVersion: v2
     appVersion: v18.2.4
-    created: "2025-06-23T03:34:02.6012687+08:00"
+    created: "2025-06-23T04:20:08.4742056+08:00"
     description: Complete Rook Ceph installation with block, filesystem, and object
       storage
     digest: 004b23b0506b07113b71e4a296cc5e859ec5d6d211a07136affa7d7517d7007a
@@ -111,4 +104,4 @@ entries:
     urls:
     - https://charts.kermon.today/rook-ceph-complete-0.1.0.tgz
     version: 0.1.0
-generated: "2025-06-23T03:34:02.4818913+08:00"
+generated: "2025-06-23T04:20:08.3685095+08:00"
