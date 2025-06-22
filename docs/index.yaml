@@ -2,7 +2,7 @@ apiVersion: v1
 entries:
   nvisnx-deployment:
   - apiVersion: v2
-    created: "2025-06-23T03:21:08.7823059+08:00"
+    created: "2025-06-23T03:34:02.5493974+08:00"
     dependencies:
     - condition: minio.enabled
       name: minio
@@ -37,11 +37,11 @@ entries:
     name: nvisnx-deployment
     type: application
     urls:
-    - https://charts.kermon.today/docs/nvisnx-deployment-0.1.0.tgz
+    - https://charts.kermon.today/nvisnx-deployment-0.1.0.tgz
     version: 0.1.0
   nvisnx-prerequists:
   - apiVersion: v2
-    created: "2025-06-23T03:21:08.7911258+08:00"
+    created: "2025-06-23T03:34:02.5596718+08:00"
     dependencies:
     - condition: certmanager.enabled
       name: cert-manager
@@ -55,12 +55,12 @@ entries:
     digest: 0e01d9bd4a9018c7baec43f8e2e00548d647d5e56af5d86f97a782371c9c4688
     name: nvisnx-prerequists
     urls:
-    - https://charts.kermon.today/docs/nvisnx-prerequists-0.1.0.tgz
+    - https://charts.kermon.today/nvisnx-prerequists-0.1.0.tgz
     version: 0.1.0
   observability-stack:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2025-06-23T03:21:08.8225812+08:00"
+    created: "2025-06-23T03:34:02.6012687+08:00"
     dependencies:
     - name: prometheus
       repository: https://prometheus-community.github.io/helm-charts
@@ -83,12 +83,12 @@ entries:
     name: observability-stack
     type: application
     urls:
-    - https://charts.kermon.today/docs/observability-stack-0.1.0.tgz
+    - https://charts.kermon.today/observability-stack-0.1.0.tgz
     version: 0.1.0
   rook-ceph-complete:
   - apiVersion: v2
     appVersion: v18.2.4
-    created: "2025-06-23T03:21:08.8487745+08:00"
+    created: "2025-06-23T03:34:02.6012687+08:00"
     description: Complete Rook Ceph installation with block, filesystem, and object
       storage
     digest: 004b23b0506b07113b71e4a296cc5e859ec5d6d211a07136affa7d7517d7007a
@@ -109,6 +109,6 @@ entries:
     - https://github.com/rook/rook
     type: application
     urls:
-    - https://charts.kermon.today/docs/rook-ceph-complete-0.1.0.tgz
+    - https://charts.kermon.today/rook-ceph-complete-0.1.0.tgz
     version: 0.1.0
-generated: "2025-06-23T03:21:08.6917217+08:00"
+generated: "2025-06-23T03:34:02.4818913+08:00"
