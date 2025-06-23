@@ -3,14 +3,14 @@ entries:
   logging-stack:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2025-06-23T16:00:37.6896809+08:00"
+    created: "2025-06-23T16:07:04.1900568+08:00"
     dependencies:
     - condition: fluentd.enabled
       name: fluentd
       repository: https://fluent.github.io/helm-charts
-      version: 0.3.0
+      version: 0.5.3
     description: A Helm umbrella chart for FluentD only
-    digest: cf09c3aa59ce078b7ad0295df0a512cc8627a1404bb5f344513ff01352330075
+    digest: df57f7292be4fe8728e5ff7cac831612f135d7d7d337e638208502c9fc7678c5
     name: logging-stack
     type: application
     urls:
@@ -19,7 +19,7 @@ entries:
   monitoring-stack:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2025-06-23T16:00:37.7569052+08:00"
+    created: "2025-06-23T16:07:04.2599398+08:00"
     dependencies:
     - condition: fluentd.enabled
       name: fluentd
@@ -42,7 +42,7 @@ entries:
     version: 0.1.0
   nvisnx-deployment:
   - apiVersion: v2
-    created: "2025-06-23T16:00:37.8069987+08:00"
+    created: "2025-06-23T16:07:04.3177431+08:00"
     dependencies:
     - condition: minio.enabled
       name: minio
@@ -81,7 +81,7 @@ entries:
     version: 0.1.0
   nvisnx-prerequists:
   - apiVersion: v2
-    created: "2025-06-23T16:00:37.8170066+08:00"
+    created: "2025-06-23T16:07:04.3238065+08:00"
     dependencies:
     - condition: certmanager.enabled
       name: cert-manager
@@ -100,7 +100,7 @@ entries:
   rook-ceph-complete:
   - apiVersion: v2
     appVersion: v18.2.4
-    created: "2025-06-23T16:00:37.8170066+08:00"
+    created: "2025-06-23T16:07:04.3238065+08:00"
     description: Complete Rook Ceph installation with block, filesystem, and object
       storage
     digest: 004b23b0506b07113b71e4a296cc5e859ec5d6d211a07136affa7d7517d7007a
@@ -123,4 +123,4 @@ entries:
     urls:
     - rook-ceph-complete-0.1.0.tgz
     version: 0.1.0
-generated: "2025-06-23T16:00:37.6868641+08:00"
+generated: "2025-06-23T16:07:04.1883813+08:00"
