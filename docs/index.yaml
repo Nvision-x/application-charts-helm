@@ -3,27 +3,46 @@ entries:
   logging-stack:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2025-06-23T04:20:08.4075889+08:00"
+    created: "2025-06-23T16:00:37.6896809+08:00"
     dependencies:
-    - name: fluentd
+    - condition: fluentd.enabled
+      name: fluentd
       repository: https://fluent.github.io/helm-charts
       version: 0.3.0
-    - name: loki
-      repository: https://grafana.github.io/helm-charts
-      version: 5.47.2
-    - name: kube-prometheus-stack
-      repository: https://prometheus-community.github.io/helm-charts
-      version: 72.5.2
-    description: A Helm umbrella chart for Fluentd, Loki, and kube-prometheus-stack
-    digest: 4005acc998913db7d92f897dbe4d437a9d961500e91df135796c8f26e46d9bd9
+    description: A Helm umbrella chart for FluentD only
+    digest: cf09c3aa59ce078b7ad0295df0a512cc8627a1404bb5f344513ff01352330075
     name: logging-stack
     type: application
     urls:
-    - https://charts.kermon.today/logging-stack-0.1.0.tgz
+    - logging-stack-0.1.0.tgz
+    version: 0.1.0
+  monitoring-stack:
+  - apiVersion: v2
+    appVersion: "1.0"
+    created: "2025-06-23T16:00:37.7569052+08:00"
+    dependencies:
+    - condition: fluentd.enabled
+      name: fluentd
+      repository: https://fluent.github.io/helm-charts
+      version: 0.3.0
+    - condition: loki.enabled
+      name: loki
+      repository: https://grafana.github.io/helm-charts
+      version: 5.47.2
+    - condition: kube-prometheus-stack.enabled
+      name: kube-prometheus-stack
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 72.5.2
+    description: A Helm umbrella chart for Fluentd, Loki, and kube-prometheus-stack
+    digest: 1cac8c1207de6980bd857b8cb28e642368adc7750e99bd5c9cf6239fbacd9b05
+    name: monitoring-stack
+    type: application
+    urls:
+    - monitoring-stack-0.1.0.tgz
     version: 0.1.0
   nvisnx-deployment:
   - apiVersion: v2
-    created: "2025-06-23T04:20:08.4706068+08:00"
+    created: "2025-06-23T16:00:37.8069987+08:00"
     dependencies:
     - condition: minio.enabled
       name: minio
@@ -58,11 +77,11 @@ entries:
     name: nvisnx-deployment
     type: application
     urls:
-    - https://charts.kermon.today/nvisnx-deployment-0.1.0.tgz
+    - nvisnx-deployment-0.1.0.tgz
     version: 0.1.0
   nvisnx-prerequists:
   - apiVersion: v2
-    created: "2025-06-23T04:20:08.4742056+08:00"
+    created: "2025-06-23T16:00:37.8170066+08:00"
     dependencies:
     - condition: certmanager.enabled
       name: cert-manager
@@ -76,12 +95,12 @@ entries:
     digest: 0e01d9bd4a9018c7baec43f8e2e00548d647d5e56af5d86f97a782371c9c4688
     name: nvisnx-prerequists
     urls:
-    - https://charts.kermon.today/nvisnx-prerequists-0.1.0.tgz
+    - nvisnx-prerequists-0.1.0.tgz
     version: 0.1.0
   rook-ceph-complete:
   - apiVersion: v2
     appVersion: v18.2.4
-    created: "2025-06-23T04:20:08.4742056+08:00"
+    created: "2025-06-23T16:00:37.8170066+08:00"
     description: Complete Rook Ceph installation with block, filesystem, and object
       storage
     digest: 004b23b0506b07113b71e4a296cc5e859ec5d6d211a07136affa7d7517d7007a
@@ -102,6 +121,6 @@ entries:
     - https://github.com/rook/rook
     type: application
     urls:
-    - https://charts.kermon.today/rook-ceph-complete-0.1.0.tgz
+    - rook-ceph-complete-0.1.0.tgz
     version: 0.1.0
-generated: "2025-06-23T04:20:08.3685095+08:00"
+generated: "2025-06-23T16:00:37.6868641+08:00"
