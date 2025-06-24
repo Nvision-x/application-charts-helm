@@ -3,7 +3,7 @@ entries:
   logging-stack:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2025-06-23T16:07:04.1900568+08:00"
+    created: "2025-06-24T22:17:13.0255228+08:00"
     dependencies:
     - condition: fluentd.enabled
       name: fluentd
@@ -19,12 +19,8 @@ entries:
   monitoring-stack:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2025-06-23T16:07:04.2599398+08:00"
+    created: "2025-06-24T22:17:13.0770125+08:00"
     dependencies:
-    - condition: fluentd.enabled
-      name: fluentd
-      repository: https://fluent.github.io/helm-charts
-      version: 0.3.0
     - condition: loki.enabled
       name: loki
       repository: https://grafana.github.io/helm-charts
@@ -34,7 +30,7 @@ entries:
       repository: https://prometheus-community.github.io/helm-charts
       version: 72.5.2
     description: A Helm umbrella chart for Fluentd, Loki, and kube-prometheus-stack
-    digest: 1cac8c1207de6980bd857b8cb28e642368adc7750e99bd5c9cf6239fbacd9b05
+    digest: 324ca3035db9116bcb8fe52f36d25be36a9167cffeb0fe2da90b14c14c0c39c9
     name: monitoring-stack
     type: application
     urls:
@@ -42,7 +38,7 @@ entries:
     version: 0.1.0
   nvisnx-deployment:
   - apiVersion: v2
-    created: "2025-06-23T16:07:04.3177431+08:00"
+    created: "2025-06-24T22:17:13.157707+08:00"
     dependencies:
     - condition: minio.enabled
       name: minio
@@ -81,7 +77,7 @@ entries:
     version: 0.1.0
   nvisnx-prerequists:
   - apiVersion: v2
-    created: "2025-06-23T16:07:04.3238065+08:00"
+    created: "2025-06-24T22:17:13.1663347+08:00"
     dependencies:
     - condition: certmanager.enabled
       name: cert-manager
@@ -100,7 +96,7 @@ entries:
   rook-ceph-complete:
   - apiVersion: v2
     appVersion: v18.2.4
-    created: "2025-06-23T16:07:04.3238065+08:00"
+    created: "2025-06-24T22:17:13.1663347+08:00"
     description: Complete Rook Ceph installation with block, filesystem, and object
       storage
     digest: 004b23b0506b07113b71e4a296cc5e859ec5d6d211a07136affa7d7517d7007a
@@ -123,4 +119,4 @@ entries:
     urls:
     - rook-ceph-complete-0.1.0.tgz
     version: 0.1.0
-generated: "2025-06-23T16:07:04.1883813+08:00"
+generated: "2025-06-24T22:17:13.0220515+08:00"
